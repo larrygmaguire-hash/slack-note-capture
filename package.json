@@ -1,7 +1,7 @@
 {
   "name": "slack-note-capture",
-  "version": "1.0.0",
-  "description": "Slack MCP server for capturing notes, ideas, and files to archive",
+  "version": "2.0.0",
+  "description": "Slack MCP server for two-way Claude-Slack communication with thread support",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
