@@ -2,6 +2,14 @@
 
 A Model Context Protocol (MCP) server that enables two-way communication between Claude Code and Slack. Post messages, read threads, and wait for user replies — enabling remote conversations when you're away from your machine.
 
+> **New to MCP servers?** See [QUICKSTART.md](QUICKSTART.md) for step-by-step setup instructions with screenshots-style guidance.
+
+## Prerequisites
+
+- **Node.js 18+** — [nodejs.org](https://nodejs.org/)
+- **Claude Code** — Anthropic's CLI tool ([claude.ai/claude-code](https://claude.ai/claude-code))
+- **Slack workspace** — Free plan works; you need permission to install apps
+
 ## Features
 
 - **Two-way conversations** — Claude asks questions via Slack, you reply from your phone
@@ -27,23 +35,32 @@ Start a task, go about your day, get notified when input is needed.
 ## Installation
 
 ```bash
+git clone https://github.com/larrygmaguire-hash/slack-note-capture.git
 cd slack-note-capture
 npm install
 ```
 
 ## Slack App Setup
 
-1. Go to [api.slack.com/apps](https://api.slack.com/apps) and create a new app
-2. Under **OAuth & Permissions**, add these Bot Token Scopes:
-   - `channels:history` — Read messages from public channels
-   - `channels:read` — List channels
-   - `chat:write` — Post messages
-   - `files:read` — Access shared files
-   - `groups:history` — Read messages from private channels (optional)
-   - `groups:read` — List private channels (optional)
-3. Install the app to your workspace
-4. Copy the **Bot User OAuth Token** (starts with `xoxb-`)
-5. Invite the bot to your channel: `/invite @YourBotName`
+> **Detailed instructions:** See [QUICKSTART.md](QUICKSTART.md) for step-by-step guidance with explanations.
+
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → **From scratch**
+2. Name your app (e.g., `Claude Assistant`) and select your workspace
+3. Go to **OAuth & Permissions** and add these Bot Token Scopes:
+
+| Scope | Purpose |
+|-------|---------|
+| `channels:history` | Read messages from public channels |
+| `channels:read` | List channels |
+| `chat:write` | Post messages |
+| `files:read` | Access shared files |
+| `groups:history` | Read messages from private channels (optional) |
+| `groups:read` | List private channels (optional) |
+
+4. Click **Install to Workspace** and authorise
+5. Copy the **Bot User OAuth Token** (starts with `xoxb-`)
+6. Create a channel for Claude and get its Channel ID (right-click channel → View details → scroll to bottom)
+7. Invite the bot: `/invite @YourAppName` in the channel
 
 ## Configuration
 
@@ -269,6 +286,22 @@ The default timeout is 15 minutes. Increase with `timeout_minutes`, or call `sla
 1. Check `~/.claude.json` syntax is valid JSON
 2. Restart Claude Code / VS Code
 3. Verify the path to `index.js` is correct
+
+## Testing Your Setup
+
+After configuration, restart Claude Code and test:
+
+```
+List my Slack channels
+```
+
+If successful, you'll see your workspace channels. Then test posting:
+
+```
+Post "Hello from Claude!" to my Slack inbox
+```
+
+Check your Slack channel for the message. For full testing steps including the reply feature, see [QUICKSTART.md](QUICKSTART.md#step-4-test-your-setup).
 
 ## Security Notes
 
